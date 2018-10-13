@@ -1,0 +1,7 @@
+{
+  "name": "skillz-forever",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
