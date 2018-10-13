@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="nav">
+    <ion-title>Submit Vote</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="votingForm" (ngSubmit)="submit()">
+    <ion-list radio-group formControlName="showcaseId">
+      <ion-list-header>
+        Showcases
+      </ion-list-header>
+
+      <ion-item *ngFor="let showcase of showcases">
+        <ion-label>{{ showcase.showcaseDetail.name }}</ion-label>
+        <ion-radio [value]="showcase.id"></ion-radio>
+      </ion-item>
+
+      <button ion-button block>
+        Submit
+      </button>
+    </ion-list>
+  </form>
+</ion-content>

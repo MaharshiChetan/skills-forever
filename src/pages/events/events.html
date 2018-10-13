@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="nav">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upcoming Events</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="fetchEvents($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!events" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-card tappable *ngFor="let e of events" (click)="goToEventDetails(e)"
+    class="click">
+
+    <img class="cover-image placeholder" [src]="placeholderImage"
+      (load)="loaded = false" [hidden]="loaded" />
+
+    <img (load)="loaded = true" [src]="e.eventImage" class="original"
+      [ngClass]="{'animated fadeIn delay-3s': animate}" />
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="vertical-align-content date"
+            text-center>
+            {{ e.startDateAndTime | date:'MMM d EEE'}}
+            <div class="vertical-line vertical-align-content"></div>
+          </ion-col>
+          <ion-col col-7>
+            <h2 style="font-weight: bold;">
+              {{ e.eventName }}
+            </h2>
+            <p>City: {{ e.eventCity }}</p>
+            <p>
+              Time: {{ e.startDateAndTime | date: 'h:mm a'
+              }} - {{ e.endDateAndTime | date: 'h:mm a' }}
+            </p>
+          </ion-col>
+          <ion-col class="vertical-align-content book">
+            <button ion-button color="danger" [ngClass]="{'animated bounceIn': animate}">Book</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

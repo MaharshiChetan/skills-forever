@@ -1,0 +1,46 @@
+comments-page {
+  .item-md h2 {
+    font-weight: bold;
+  }
+
+  .item-md p {
+    margin: 8px 0px 2px;
+    color: gray;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    margin: 2px;
+    word-break: break-word;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+  }
+
+  img {
+    position: absolute;
+    top: 8px;
+  }
+
+  .footer-btn {
+    font-size: x-large;
+  }
+
+  .item-md ion-avatar[item-start] {
+    margin: 0px 9px 0px 0px;
+  }
+  .comment {
+    padding: 5px 2px 5px 0px;
+  }
+
+  .label-md {
+    margin: 7px 0px 0px;
+  }
+
+  .item-md {
+    padding-left: 8px;
+  }
+
+  .click:active {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}

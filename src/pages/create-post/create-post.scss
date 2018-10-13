@@ -1,0 +1,23 @@
+create-post-page {
+  .item-md ion-thumbnail img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .post-padding {
+    padding: 8px;
+  }
+
+  [col-3] img {
+    height: 70px;
+    width: 70px;
+  }
+  .text-input-md {
+    margin: 0px 0px;
+  }
+
+  .input-cover {
+    border: 1px solid lightgray;
+    margin: -5px;
+  }
+}

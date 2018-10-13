@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ type }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item class="click" *ngFor="let user of users"
+      (click)="goToProfilePage(user)">
+      <ion-avatar item-start>
+        <img class="cover-image animated fadeIn delay-3s"
+          [src]="user.profilePhoto">
+      </ion-avatar>
+      <h2>{{ user.userName }}</h2>
+      <p>{{ user.displayName }}</p>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content [loadingSpinner]="loader"
+        [loadingText]="loadingText"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

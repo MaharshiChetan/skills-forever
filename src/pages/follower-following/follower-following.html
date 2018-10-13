@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-segment [(ngModel)]="type">
+    <ion-segment-button value="Dropers" (ionSelect)="fetchFollowers()">
+      Dropers
+      <div class="vertical-line"></div>
+    </ion-segment-button>
+    <ion-segment-button value="Droping" (ionSelect)="fetchFollowings()">
+      Droping
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="type" padding>
+
+    <ion-list *ngSwitchCase="'Dropers'">
+      <ion-item class="click" *ngFor="let user of followers"
+        (click)="goToProfilePage(user)">
+        <ion-avatar item-start>
+          <img class="cover-image animated fadeIn delay-3s"
+            [src]="user.profilePhoto">
+        </ion-avatar>
+        <h2>{{ user.userName }}</h2>
+        <p>{{ user.displayName }}</p>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content [loadingSpinner]="followerLoader"
+          [loadingText]="followerLoadingText"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Droping'">
+      <ion-item class="click" *ngFor="let user of following"
+        (click)="goToProfilePage(user)">
+        <ion-avatar item-start>
+          <img class="cover-image animated fadeIn delay-3s"
+            [src]="user.profilePhoto">
+        </ion-avatar>
+        <h2>{{ user.userName }}</h2>
+        <p>{{ user.displayName }}</p>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content [loadingSpinner]="followingLoader"
+          [loadingText]="followingLoadingText"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+  </div>
+
+</ion-content>

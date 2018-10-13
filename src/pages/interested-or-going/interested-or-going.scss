@@ -1,0 +1,39 @@
+interested-or-going-page {
+  .item-md ion-avatar img {
+    height: 16vw;
+    width: 16vw;
+  }
+  .item-md {
+    padding-left: 0px;
+  }
+
+  .item-ios {
+    padding-left: 6px;
+  }
+
+  .item-ios ion-avatar ion-img,
+  .item-ios ion-avatar img {
+    height: 16vw;
+    width: 16vw;
+  }
+
+  .click:active {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .vertical-line {
+    border-left: 1px solid lightgray;
+    position: absolute;
+    height: 100%;
+    left: 99.7%;
+    top: 4px;
+  }
+
+  .segment-button.segment-activated {
+    font-weight: bold;
+  }
+
+  .segment-md .segment-button {
+    font-weight: bold;
+  }
+}

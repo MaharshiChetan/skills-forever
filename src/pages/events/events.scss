@@ -1,0 +1,69 @@
+events-page {
+  .click:active {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .vertical-align-content {
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+    color: red;
+  }
+
+  .vertical-line {
+    border-left: 1px solid lightgray;
+    position: absolute;
+    height: 80%;
+    left: 97%;
+    top: 7px;
+  }
+
+  .card-md {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  .card-content-md {
+    padding: 5px 5px;
+  }
+
+  ion-card .original {
+    max-height: 190px;
+  }
+
+  .date {
+    font-weight: bold;
+  }
+
+  .card-content-ios {
+    padding: 5px 5px;
+  }
+
+  .book {
+    text-align: end;
+  }
+
+  .grid {
+    padding: 0px;
+  }
+
+  .card-md p {
+    margin: 0px 0px;
+    color: gray;
+  }
+
+  .card-ios p {
+    margin: 0px 0px;
+    color: gray;
+  }
+
+  [col-7] {
+    padding: 5px 10px;
+  }
+
+  ion-card .placeholder {
+    height: 190px;
+  }
+}

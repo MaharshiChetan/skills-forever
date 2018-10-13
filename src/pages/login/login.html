@@ -1,0 +1,39 @@
+<ion-content padding class="transparent-header">
+  <img class="logo animated bounceInDown" src="assets/imgs/logo/hip-hop-2.png" />
+  <div padding>
+    <form [formGroup]="login" (ngSubmit)="loginWithEmail()">
+      <ion-item class="animated bounceInLeft">
+        <ion-input type="email" placeholder="Email"
+          [(ngModel)]="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item class="animated bounceInRight">
+        <ion-input type="password" placeholder="Password"
+          [(ngModel)]="password" formControlName="password"></ion-input>
+      </ion-item>
+      <button type="submit" ion-button block outline color="light"
+        class="login-button animated zoomInUp" [disabled]="!login.valid">Login</button>
+    </form>
+  </div>
+  <div class="strike">
+    <span>OR</span>
+  </div>
+  <button ion-button block clear (click)="facebookLogin()"
+    color="light" class="login-button animated zoomInUp">
+    <ion-icon name="logo-facebook"></ion-icon> Login with
+    Facebook
+  </button>
+  <button ion-button block clear (click)="googleLogin()"
+    color="light" class="login-button animated zoomInUp">
+    <ion-icon name="logo-google"></ion-icon> Login with
+    Google
+  </button>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="footer">
+    <div (click)="goToSignup()">
+      <span>Don't have an account?
+        <strong>Sign up here</strong>.</span>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Guest List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-segment [(ngModel)]="type">
+    <ion-segment-button value="interested" (ionSelect)="fetchInterestedUsers()">
+      Interested
+      <div class="vertical-line"></div>
+    </ion-segment-button>
+    <ion-segment-button value="going" (ionSelect)="fetchGoingUsers()">
+      Going
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="type" padding>
+    <div *ngIf="!interestedUsers" class="spinner-container">
+      <ion-spinner></ion-spinner>
+    </div>
+    <ion-list *ngSwitchCase="'interested'">
+      <ion-item class="click" *ngFor="let user of interestedUsers"
+        (click)="goToProfilePage(user)">
+        <ion-avatar item-start>
+          <img class="cover-image animated fadeIn delay-3s"
+            [src]="user.profilePhoto">
+        </ion-avatar>
+        <h2>{{ user.userName }}</h2>
+        <p>{{ user.displayName }}</p>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content [loadingSpinner]="interestedLoader"
+          [loadingText]="interestedLoadingText"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'going'">
+      <div *ngIf="!goingUsers" class="spinner-container">
+        <ion-spinner></ion-spinner>
+      </div>
+      <ion-item class="click" *ngFor="let user of goingUsers"
+        (click)="goToProfilePage(user)">
+        <ion-avatar item-start>
+          <img class="cover-image animated fadeIn delay-3s"
+            [src]="user.profilePhoto">
+        </ion-avatar>
+        <h2>{{ user.userName }}</h2>
+        <p>{{ user.displayName }}</p>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content [loadingSpinner]="goingLoader"
+          [loadingText]="goingLoadingText"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+  </div>
+
+</ion-content>

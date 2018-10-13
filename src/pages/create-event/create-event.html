@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar color="nav">
+    <ion-buttons end>
+      <button ion-button (click)="submitForm(myInput)"
+        [disabled]="!eventForm.valid">
+        {{ button | uppercase }}
+      </button>
+    </ion-buttons>
+    <ion-title>{{ button }} Event</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-center>
+  <form [formGroup]="eventForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Event Name (Title)</ion-label>
+        <ion-input formControlName="eventName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Description of Event</ion-label>
+        <ion-textarea #myInput rows="3" [value]="eventData?.eventDescription"
+          (keyup)="adjust(0)"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Location(Full Address)</ion-label>
+        <ion-textarea formControlName="eventLocation" rows="2"
+          (keyup)="adjust(1)"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>State</ion-label>
+        <ion-input formControlName="eventState"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input formControlName="eventCity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="cash"></ion-icon>
+          Amount in Rupees
+        </ion-label>
+        <ion-input type="number" formControlName="eventPrice"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime pickerFormat="DD MMM YYYY" [min]="event.min"
+          [max]="event.max" formControlName="startDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>End Date</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY" [min]="event.min"
+          [max]="event.max" formControlName="endDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Start Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"
+          formControlName="startTime"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End Time</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"
+          formControlName="endTime"></ion-datetime>
+      </ion-item>
+
+      <img *ngIf="chosenPicture || eventData?.eventImage"
+        [src]="chosenPicture || eventData?.eventImage" />
+      <button type="button" ion-button icon-start (click)="uploadPicture()">
+        <ion-icon name="camera"></ion-icon>
+        {{ imageChoice }}
+      </button>
+
+      <ion-item-group *ngIf="categories.length > 0">
+        <ion-item-divider color="light">Categories
+          (<ion-icon name="arrow-round-back"></ion-icon>
+          Slide left to remove category)
+        </ion-item-divider>
+        <ion-item-sliding *ngFor="let category of categories; let i = index">
+          <ion-item>
+            {{ category.name }}
+            <div class="float">
+              <i class="fas fa-rupee-sign"></i>
+              {{ category.price }}
+            </div>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="removeCategory(i)">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-item-group>
+      <div padding>
+        <button type="button" block ion-button (click)="addCategories()">
+          Add Categories For Participation
+        </button>
+      </div>
+
+      <ion-item-group *ngIf="showcases.length > 0">
+        <ion-item-divider color="light">Showcase
+          (<ion-icon name="arrow-round-back"></ion-icon>
+          Slide left to remove showcase)
+        </ion-item-divider>
+        <ion-item-sliding *ngFor="let showcase of showcases; let i = index">
+          <ion-item>
+            {{ showcase.name }}
+            <div class="float">
+              {{ showcase.totalVotes }}
+            </div>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="removeShowcase(i)">
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-item-group>
+      <div padding>
+        <button type="button" block ion-button (click)="addShowcase()">
+          Add Showcase For voting
+        </button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

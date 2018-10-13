@@ -1,0 +1,114 @@
+<ion-header [ngClass]="{'hide-header':showheader,'show-header':hideheader}">
+  <ion-navbar color="nav">
+    <button ion-button icon-only menuToggle>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <ion-buttons end *ngIf="!otherUser">
+      <button ion-button icon-only (click)="editUserProfile()">
+        <ion-icon ios="ios-create-outline" md="md-create"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end *ngIf="otherUser">
+      <button ion-button icon-only (click)="goToOneToOneChatPage(userDetails)">
+        <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="userDetails">
+      {{ userDetails.userName }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher *ngIf="!otherUser" (ionRefresh)="fetchCurrentUserProfile($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="!userDetails" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-refresher *ngIf="otherUser" (ionRefresh)="fetchUserProfile($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="card-profile" *ngIf="userDetails">
+    <div class="card-profile_visual">
+      <img class="cover-image" [ngClass]="{'animated fadeIn delay-3s': animate}"
+        [src]="userDetails.profilePhoto" #profileImage
+        (click)="presentImage(profileImage)" />
+    </div>
+
+    <div class="card-profile_user-infos">
+      <span class="infos_name">{{userDetails.displayName}}</span>
+      <span class="infos_nick">@{{userDetails.userName}}</span>
+      <ion-fab *ngIf="!otherUser">
+        <button ion-fab color="post" (click)="changePicture()">
+          <ion-icon class="my-icon woah infinite pulse"
+            name="add"></ion-icon>
+        </button>
+      </ion-fab>
+      <ion-fab *ngIf="otherUser">
+        <button ion-fab *ngIf="!isFollowing" color="post"
+          (click)="follow()">
+          <ion-icon class="my-icon" name="ios-water-outline"></ion-icon>
+        </button>
+        <button ion-fab *ngIf="isFollowing" color="btn"
+          (click)="unfollow()">
+          <ion-icon class="my-icon animated bounce delay-2s"
+            name="ios-water-outline"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+    <div class="card-profile_user-stats">
+      <div class="stats-holder">
+        <div class="user-stats">
+          <strong>Posts</strong>
+          <span>{{ user.tweets }}</span>
+        </div>
+        <div class="user-stats" (click)="goToFollowerFollowingPage('Droping')">
+          <strong>Droping</strong>
+          <span>{{ followingCount }}</span>
+        </div>
+        <div class="user-stats" (click)="goToFollowerFollowingPage('Dropers')">
+          <strong>Dropers</strong>
+          <span>{{ followerCount }}</span>
+        </div>
+      </div>
+    </div>
+    <div id="posts" *ngIf="isFollowing || !otherUser">
+      <ion-card *ngFor="let post of posts">
+        <ion-item>
+          <ion-avatar item-start>
+            <img [src]="userDetails.profilePhoto" />
+          </ion-avatar>
+          <h2>{{userDetails.userName}}</h2>
+          <p>{{post.date}}</p>
+        </ion-item>
+        <img useImg [src]="post.postImageUrl" #postImage
+          (click)="presentImage(postImage)" />
+        <ion-card-content>
+          <p>{{post.text}}</p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col>
+            <button ion-button color="purple" clear small
+              icon-left (click)="like(post)">
+              <ion-icon name='thumbs-up'></ion-icon>
+              {{post.likes}} Likes
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button color="purple" clear small
+              icon-left (click)="comment(post)">
+              <ion-icon name='text'></ion-icon>
+              {{post.comments}} Comments
+            </button>
+          </ion-col>
+          <ion-col align-self-center text-center>
+            <p>
+              {{post.timestamp}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Comments
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+  <div *ngIf="!comments" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let comment of comments" class="click"
+      (press)="presentPopover(post.key, eventId, comment.key, comment.uid)">
+      <ion-avatar *ngIf="comment.userDetails" item-start
+        (click)="goToProfilePage(comment.userDetails)">
+        <img class="comment-image" [src]="comment.userDetails.profilePhoto">
+      </ion-avatar>
+      <h2 (click)="goToProfilePage(comment.userDetails)"
+        *ngIf="comment.userDetails">
+        {{ comment?.userDetails.userName }}
+      </h2>
+      <pre>{{ comment.comment }}</pre>
+      <p>{{ comment.date | date: 'MMM d'}} at {{
+        comment.date | date: 'h:mm a'}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-avatar *ngIf="currentUserDetails" item-start>
+        <img [src]="currentUserDetails.profilePhoto">
+      </ion-avatar>
+      <ion-textarea placeholder="Write a comment..."
+        [(ngModel)]="commentText" #comment (keyup)="adjust()"></ion-textarea>
+      <button ion-button clear item-end (click)="createComment(comment)">
+        <ion-icon class="footer-btn" name="send"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

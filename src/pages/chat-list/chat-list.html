@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Chats</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="fetchDisplayMessages($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-searchbar [(ngModel)]="searchTerm"
+      [showCancelButton]="shouldShowCancel" (ionInput)="setFilteredItems($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+    <div *ngIf="!displayMessages" class="spinner-container">
+      <ion-spinner></ion-spinner>
+    </div>
+    <ion-item tappable class="click" *ngFor="let message of displayMessages"
+      (click)="goToChatPage(message.userDetails)" (press)="presentPopover(message)">
+      <ion-avatar item-start *ngIf="message.userDetails">
+        <img [src]="message?.userDetails.profilePhoto">
+      </ion-avatar>
+      <h2 *ngIf="message.userDetails">{{
+        message?.userDetails.userName }}</h2>
+      <p *ngIf="message.userDetails">{{ message?.message }}</p>
+      <ion-note item-end>{{ message.timeStamp | date:'h:mm
+        a'}}</ion-note>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content [loadingSpinner]="loader"
+        [loadingText]="loadingText"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

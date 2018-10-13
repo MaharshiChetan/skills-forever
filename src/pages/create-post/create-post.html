@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="updatePost(myInput)">
+        Post
+      </button>
+    </ion-buttons>
+    <ion-title>{{ event.name }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card class="post-padding">
+    <ion-row>
+      <ion-col col-3 *ngIf="image || post?.imageUrl">
+        <ion-thumbnail item-start (click)="presentImage(myImage)">
+          <img class="cover-image" [src]="image || post?.imageUrl"
+            alt="" #myImage>
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col>
+        <ion-textarea placeholder="Write something..." rows="5"
+          [value]="post?.textualContent" #myInput (keyup)="adjust()"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <button *ngIf="!post" ion-button block (click)="createPost(myInput)">Post</button>
+    <button *ngIf="post" ion-button block (click)="updatePost(myInput)">Post</button>
+
+  </ion-card>
+</ion-content>

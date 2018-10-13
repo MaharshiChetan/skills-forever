@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ otherUserDetails?.userName }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="!messages" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngFor="let message of messages" class="message-wrapper">
+    <div *ngIf="message.sentBy === otherUserDetails.uid">
+      <img tappable (click)="goToProfilePage(otherUserDetails)"
+        class="profile-pic left" [src]="otherUserDetails.profilePhoto"
+        onerror="onProfilePicError(this)" />
+
+      <div class="chat-bubble left" (press)="presentPopover(message)">
+
+        <div class="message" [innerHTML]="message.message"
+          autolinker>
+        </div>
+
+        <div class="message-detail left">
+          <!-- <span (click)="viewProfile(message)" class="bold">{{otherUserDetails?.userName}}</span>, -->
+          <span>{{ message.timeStamp | amCalendar }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="message.sentBy !== otherUserDetails.uid">
+
+      <img tappable (click)="goToProfilePage(currentUserDetails)"
+        class="profile-pic right" [src]="currentUserDetails.profilePhoto"
+        onerror="onProfilePicError(this)" />
+
+      <div class="chat-bubble right" (press)="presentPopover(message)">
+
+        <div class="message" [innerHTML]="message.message"
+          autolinker>
+        </div>
+
+        <div class="message-detail right">
+          <!-- <span (click)="viewProfile(message)" class="bold">{{currentUserDetails?.userName}}</span>, -->
+          <span>{{ message.timeStamp | amCalendar }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="cf"></div>
+
+  </div>
+
+  <!-- <button ion-fab [hideFabOnscroll]='content' mini>
+    <ion-icon ios="ios-arrow-dropdown-circle" md="md-arrow-dropdown-circle"></ion-icon>
+  </button> -->
+
+</ion-content>
+<ion-footer>
+  <ion-item>
+    <ion-input [(ngModel)]="chatBox" placeholder="Send {{otherUserDetails?.userName}} a message..."></ion-input>
+    <button ion-button clear (click)="send(chatBox)"
+      item-end>
+      <ion-icon class="footer-btn" name="send"></ion-icon>
+    </button>
+  </ion-item>
+</ion-footer>

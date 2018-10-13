@@ -1,0 +1,149 @@
+profile-page {
+  $gradient: #f96b4c, #f23182;
+  $radius: 10px;
+  $visual-height: 68%;
+  $datas-height: calc(100% - #{$visual-height}+2px);
+  :root {
+    font-size: 16px;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+  }
+  #posts {
+    margin-top: 18.5vh;
+  }
+  .scroll-content {
+    top: -56px !important;
+    padding-top: 55px !important;
+  }
+  .hide-header {
+    transition: top 0.25s ease;
+    top: -56px;
+  }
+  .show-header {
+    transition: top 0.25s ease;
+    top: 0px;
+  }
+
+  .card-profile_visual img {
+    opacity: 0.8;
+    height: 100%;
+    width: 100%;
+  }
+  .card-profile {
+    float: left;
+    position: absolute;
+    width: 100%;
+    height: 80vh;
+    background: #fff;
+    z-index: 1;
+    box-shadow: 0 0 5px rgba(black, 0.1);
+    &_visual {
+      height: $visual-height;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(
+        to bottom,
+        darken(#545559, 10%),
+        saturate(darken(#3a4a7b, 2%), 20%),
+        saturate(darken(#3a4a7b, 15%), 20%)
+      );
+    }
+    &_user-infos {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      margin: auto;
+      top: calc(#{$visual-height} - 100px);
+      color: #fff;
+      text-align: center;
+      ion-fab {
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: block;
+        clear: both;
+        margin: auto;
+        border-radius: 100%;
+        top: calc(500% + 66px);
+        &:after {
+          font-style: normal;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: block;
+          left: 0;
+          top: 0;
+        }
+      }
+      .infos_name,
+      .infos_nick {
+        display: block;
+        clear: both;
+        padding-top: 0;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        top: 8px;
+        font-weight: 800;
+      }
+      .infos_nick {
+        top: 32px;
+        font-size: 14px;
+        font-weight: 300;
+      }
+    }
+    &_user-stats {
+      background: #fff;
+      float: left;
+      width: 100%;
+      height: $datas-height;
+      border-bottom-left-radius: $radius;
+      border-bottom-right-radius: $radius;
+      .stats-holder {
+        position: relative;
+        margin-top: 2.8em;
+        width: 100%;
+        display: flex;
+      }
+      .user-stats {
+        flex: 1;
+        text-align: center;
+        strong {
+          display: block;
+          float: left;
+          clear: both;
+          width: 100%;
+          color: #b3b1b2;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: -0.2px;
+        }
+        span {
+          font-size: 26px;
+          color: #5e5e5e;
+          padding: 0.18em 0;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .my-icon {
+    font-size: 35px; //Preferred size here
+  }
+}

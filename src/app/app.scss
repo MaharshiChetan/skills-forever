@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,70 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@import '../theme/common';
+.toastoffline .toast-container {
+  background-color: red;
+  height: 20px;
+  text-align: center;
+}
+
+.toastonline .toast-container {
+  background-color: green;
+  height: 20px;
+  text-align: center;
+}
+
+.add-toast .toast-container {
+  background-color: mediumpurple;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.add-toast.toast-md .toast-wrapper {
+  top: 60px;
+  width: 90%;
+  border-radius: 10px;
+}
+
+.fail-toast .toast-container {
+  background-color: #cf457a;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.fail-toast.toast-md .toast-wrapper {
+  top: 60px;
+  width: 90%;
+  border-radius: 10px;
+}
+.success-toast .toast-container {
+  background-color: #49b7f0;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.success-toast.toast-md .toast-wrapper {
+  top: 60px;
+  width: 90%;
+  border-radius: 10px;
+}
+
+.contain-image {
+  object-fit: contain;
+  max-height: 430px;
+  background: #d3d3d35e;
+}
+
+.cover-image {
+  object-fit: cover;
+}
+
+.click:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.spinner-container {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
