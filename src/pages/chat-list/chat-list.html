@@ -21,8 +21,13 @@
     </div>
     <ion-item tappable class="click" *ngFor="let message of displayMessages"
       (click)="goToChatPage(message.userDetails)" (press)="presentPopover(message)">
-      <ion-avatar item-start *ngIf="message.userDetails">
+      <ion-avatar item-start *ngIf="message.userDetails"
+        class="image-container">
         <img [src]="message?.userDetails.profilePhoto">
+        <img *ngIf="message.userDetails.status == 'online'"
+          class="after" src="http://worldartsme.com/images/green-circle-clipart-1.jpg" />
+        <img *ngIf="message.userDetails.status == 'away'"
+          class="after" src="http://www.join4jason.com/images/orange-dot.png?crc=208854078" />
       </ion-avatar>
       <h2 *ngIf="message.userDetails">{{
         message?.userDetails.userName }}</h2>

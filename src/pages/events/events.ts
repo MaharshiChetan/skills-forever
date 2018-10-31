@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { EventsProvider } from '../../providers/events/events';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,8 @@ export class EventsPage {
   placeholderImage = 'assets/placeholder.jpg';
   constructor(
     public navCtrl: NavController,
-    private eventService: EventsProvider
+    private eventService: EventsProvider,
+    private authService: AuthProvider
   ) {}
 
   ionViewWillEnter() {

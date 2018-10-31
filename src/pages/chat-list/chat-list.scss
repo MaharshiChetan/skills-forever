@@ -7,4 +7,13 @@ chat-list-page {
   .list-header-md {
     margin: 0px;
   }
+
+  .image-container .after {
+    position: absolute;
+    left: 45px;
+    top: 42px;
+    height: 14px;
+    width: 14px;
+    float: right;
+  }
 }

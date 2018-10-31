@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
-// import { SQLite } from '@ionic-native/sqlite';
 import { Facebook } from '@ionic-native/facebook';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class AuthProvider {
@@ -16,17 +18,29 @@ export class AuthProvider {
     public http: HttpClient,
     private googlePlus: GooglePlus,
     private storage: Storage,
-    // private sqlite: SQLite,
-    private facebook: Facebook
+    private platform: Platform,
+    private facebook: Facebook,
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase
   ) {
-    this.storage
-      .get('user')
-      .then(res => {
-        this.uid = res;
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        console.log(user);
+
+        this.uid = user.uid;
+        this.updateOnConnect();
+        this.updateOnDisconnect();
+        this.updateOnAway();
+      }
+    });
+    // this.storage
+    //   .get('user')
+    //   .then(res => {
+    //     this.uid = res;
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
   }
 
   registerWithEmail(email, password, name, username) {
@@ -410,5 +424,35 @@ export class AuthProvider {
 
   getActiveUser() {
     return firebase.auth().currentUser;
+  }
+
+  private updateStatus(status: string) {
+    if (!this.uid) return;
+
+    this.db.object(`users/${this.uid}/personalData`).update({ status: status });
+  }
+
+  /// Updates status when connection to Firebase starts
+  private updateOnConnect() {
+    this.updateStatus('online');
+  }
+
+  updateOnAway() {
+    this.platform.resume.subscribe(result => {
+      this.updateStatus('online');
+    });
+    this.platform.pause.subscribe(result => {
+      this.updateStatus('away');
+    });
+  }
+
+  /// Updates status when connection to Firebase ends
+  private updateOnDisconnect() {
+    firebase
+      .database()
+      .ref()
+      .child(`users/${this.uid}/personalData`)
+      .onDisconnect()
+      .update({ status: 'offline' });
   }
 }

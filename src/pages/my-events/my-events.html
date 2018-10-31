@@ -12,7 +12,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-row class="help" *ngIf="events">
+  <ion-row class="help" *ngIf="events?.length > 0">
     <ion-col>
       <ion-icon name="arrow-round-back"></ion-icon>
       Slide LEFT or RIGHT for more options

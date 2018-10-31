@@ -59,7 +59,7 @@ export class PostProvider {
   }
 
   removePostLikes(postId, eventId) {
-    this.db.object(`postLikes/${eventId}/${postId}`).remove();
+    this.db.object(`eventPostLikes/${eventId}/${postId}`).remove();
   }
 
   removePostComments(postId, eventId) {
@@ -76,29 +76,31 @@ export class PostProvider {
   }
 
   deleteAllLikes(eventId: string) {
-    this.db.object(`postLikes/${eventId}`).remove();
+    this.db.object(`eventPostLikes/${eventId}`).remove();
   }
 
   likeEventPost(postId: string, uid: string, eventId: string) {
-    this.db.object(`postLikes/${eventId}/${postId}`).update({ [uid]: true });
+    this.db
+      .object(`eventPostLikes/${eventId}/${postId}`)
+      .update({ [uid]: true });
   }
 
   checkLike(postId: string, uid: string, eventId: string) {
     return this.db
-      .object(`postLikes/${eventId}/${postId}/${uid}`)
+      .object(`eventPostLikes/${eventId}/${postId}/${uid}`)
       .snapshotChanges();
   }
 
   getTotalLikes(postId: string, eventId: string) {
     // Used to build the likes count
     return this.db
-      .list(`postLikes/${eventId}/${postId}`)
+      .list(`eventPostLikes/${eventId}/${postId}`)
       .snapshotChanges()
       .pipe(map(actions => actions.map(a => ({ key: a.key }))));
   }
 
   unlikeEventPost(postId: string, uid: string, eventId: string) {
-    this.db.object(`postLikes/${eventId}/${postId}/${uid}`).remove();
+    this.db.object(`eventPostLikes/${eventId}/${postId}/${uid}`).remove();
   }
 
   createComment(postId: string, eventId: string, uid: string, comment: string) {
