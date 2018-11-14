@@ -25,8 +25,6 @@ export class AuthProvider {
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        console.log(user);
-
         this.uid = user.uid;
         this.updateOnConnect();
         this.updateOnDisconnect();

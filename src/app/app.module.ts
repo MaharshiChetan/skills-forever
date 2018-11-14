@@ -30,6 +30,7 @@ import { ImageLoaderConfig } from 'ionic-image-loader';
 import { ChatProvider } from '../providers/chat/chat';
 import { Clipboard } from '@ionic-native/clipboard';
 import { DataProvider } from '../providers/data/data';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @NgModule({
   declarations: [MyApp],
@@ -70,6 +71,7 @@ import { DataProvider } from '../providers/data/data';
     ChatProvider,
     Clipboard,
     DataProvider,
+    TabsPage,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

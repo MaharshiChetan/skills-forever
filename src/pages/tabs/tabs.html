@@ -1,5 +1,13 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Events" tabIcon="apps"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Profile" tabIcon="person"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Notifications" tabIcon="notifications"></ion-tab>
+  <ion-tab [root]="tab1Root" tabIcon="ios-home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabIcon="ios-search"></ion-tab>
+  <!-- <ion-tab (click)="show()" tabIcon="ios-add-circle"></ion-tab> -->
+  <ion-tab></ion-tab>
+  <ion-fab bottom center [hidden]="hide">
+    <button ion-fab (click)="show()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-tab [root]="tab3Root" tabIcon="ios-notifications"></ion-tab>
+  <ion-tab [root]="tab4Root" tabIcon="ios-person"></ion-tab>
 </ion-tabs>

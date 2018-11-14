@@ -6,11 +6,12 @@ tabs-page {
       6%
     ) !important;
 
+    height: 46px;
     .tab-button {
       color: color($colors, tabs-navigation, contrast);
 
       .tab-button-icon {
-        color: color($colors, tabs-navigation, contrast);
+        color: #000000;
       }
     }
 
@@ -22,5 +23,9 @@ tabs-page {
         color: $theme-color-1;
       }
     }
+  }
+
+  .tabs-md .tab-button-icon {
+    font-size: 2.1em;
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { EventsProvider } from '../../providers/events/events';
 import { AuthProvider } from '../../providers/auth/auth';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -17,10 +18,12 @@ export class EventsPage {
   constructor(
     public navCtrl: NavController,
     private eventService: EventsProvider,
-    private authService: AuthProvider
+    private authService: AuthProvider,
+    private tabsPage: TabsPage
   ) {}
 
   ionViewWillEnter() {
+    this.tabsPage.showFabButton();
     this.fetchEvents(null);
   }
 
@@ -41,6 +44,7 @@ export class EventsPage {
 
   goToEventDetails(event) {
     this.navCtrl.push('EventDetailsPage', { event: event });
+    this.tabsPage.hideFabButton();
   }
 
   share(card) {

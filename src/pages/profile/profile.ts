@@ -16,6 +16,7 @@ import { ImageViewerController } from 'ionic-img-viewer';
 import firebase from 'firebase';
 import { Message } from '../../providers/message/message';
 import { FollowProvider } from '../../providers/follow/follow';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -80,7 +81,8 @@ export class ProfilePage implements OnInit {
     private platform: Platform,
     private navParams: NavParams,
     private presentMessage: Message,
-    private followService: FollowProvider
+    private followService: FollowProvider,
+    private tabsPage: TabsPage
   ) {
     this.showheader = false;
     this.hideheader = true;
@@ -113,6 +115,7 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.tabsPage.showFabButton();
     this.otherUser = this.navParams.get('user');
     this.currentUser = this.navParams.get('currentUser');
 
@@ -237,6 +240,7 @@ export class ProfilePage implements OnInit {
                 ? data
                 : picture;
             this.navCtrl.push('CreatePostPage', { image: this.chosenPicture });
+            this.tabsPage.hideFabButton();
           });
         }
         loading.dismiss();
@@ -265,6 +269,7 @@ export class ProfilePage implements OnInit {
                 ? data
                 : picture;
             this.navCtrl.push('CreatePostPage', { image: this.chosenPicture });
+            this.tabsPage.hideFabButton();
           });
         }
         loading.dismiss();
@@ -287,6 +292,7 @@ export class ProfilePage implements OnInit {
   editUserProfile() {
     if (this.userDetails.uid === firebase.auth().currentUser.uid) {
       this.navCtrl.push('EditProfilePage', { userDetails: this.userDetails });
+      this.tabsPage.hideFabButton();
     }
   }
 
@@ -331,5 +337,6 @@ export class ProfilePage implements OnInit {
       followers: this.followers,
       type: type,
     });
+    this.tabsPage.hideFabButton();
   }
 }
